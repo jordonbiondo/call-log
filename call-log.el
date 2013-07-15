@@ -75,23 +75,24 @@ If `clog/time-format is nil, return the default ISO 8601 format"
 ;;---------------------------------------------------------------------------
 ;; Public use
 ;;---------------------------------------------------------------------------  
+;;;###autoload
 (defun clog/msg(msg)
   "Writes MSG with call information to the `clog/-output-buffer'."
   (clog/-write (format "%s %s"
-		      (clog/-color-text "clog/-MSG:" 'font-lock-constant-face)
+		      (clog/-color-text "clog/MSG:" 'font-lock-constant-face)
 		      (clog/-make-string msg))))
-
+;;;###autoload
 (defun clog/bug(msg)
   "Writes MSG denated as a bug with call information to the `clog/-output-buffer'."
   (setq msg (propertize msg 'face 'font-lock-warning-face))
   (clog/-write (format "%s %s"
-		      (clog/-color-text "clog/-BUG:" 'font-lock-warning-face)
+		      (clog/-color-text "clog/BUG:" 'font-lock-warning-face)
 		      (clog/-make-string msg))))
-
+;;;###autoload
 (defun clog/todo(msg)
   "Writes MSG denated as a todo with call information to the `clog/-output-buffer'."
   (clog/-write (format "%s %s"
-		      (clog/-color-text "clog/-TODO:" 'font-lock-variable-name-face)
+		      (clog/-color-text "clog/TODO:" 'font-lock-variable-name-face)
 		      (clog/-make-string msg))))
 
 ;;---------------------------------------------------------------------------
@@ -164,3 +165,8 @@ called in the backtrace frame, FRAME."
 (provide 'call-log)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; call-log.el
+
+
+
+
+;; Say we need a reminder to come back and work on a certain function

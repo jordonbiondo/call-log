@@ -1,0 +1,36 @@
+* call-log.el
+  Logging tool for tracking bugs, todos, and messages in elisp.
+** Usage:
+   #+BEGIN_SRC 
+(clog/msg text)  ;; write a traced log entry 
+(clog/bug text)  ;; write a traced log entry marked as a bug
+(clog/todo text) ;; write a traced log entry marked as a todo item
+   #+END_SRC
+** Example Usage
+   You can put a reminder in a function like this:
+   #+BEGIN_SRC lisp
+(defun add-2 (x)
+  "Returns X + 2."
+  (clog/todo "Find where this goes wrong.")
+  (+ x 3))
+   #+END_SRC
+   Now, whenever add-2 is called, a message like this will be written to the output buffer
+   (default is /*Messages/*):
+   [[http://i.imgur.com/Nn4MCzo.png]]
+** Customization
+   Setting the output buffer:
+   #+BEGIN_SRC lisp
+(setq clog/output-buffer "my-log-buffer")
+   #+END_SRC
+
+   Setting the time format:
+   #+BEGIN_SRC lisp
+(setq clog/output-buffer "%Y-%m-%dT%T%z")
+   #+END_SRC
+
+** Installation
+   Place call-log.el in your load path then put this in your ~/.emacs
+   #+BEGIN_SRC lisp
+(require 'call-log)
+   #+END_SRC
+   
