@@ -1,4 +1,4 @@
-;;; trace-it.el --- Log a message and where in code it came from
+;;; Call-log.el --- Log a message and where in code it came from
 ;; 
 ;; Filename: call-log.el
 ;; Description: Log messages with information about where in the source the message came from.
@@ -6,9 +6,9 @@
 ;; Maintainer: Jordon Biondo <biondoj@mail.gvsu.edu>
 ;; Created: Fri Jul 12 12:57:34 2013 (-0400)
 ;; Version: .1
-;; Last-Updated: Fri Jul 12 18:50:31 2013 (-0400)
+;; Last-Updated: Mon Jul 15 11:35:53 2013 (-0400)
 ;;           By: jorbi
-;;     Update #: 3
+;;     Update #: 4
 ;; URL: 
 ;; Doc URL: 
 ;; Keywords: 
