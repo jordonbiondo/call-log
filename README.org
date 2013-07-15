@@ -25,7 +25,7 @@
 
    Setting the time format:
    #+BEGIN_SRC lisp
-(setq clog/output-buffer "%Y-%m-%dT%T%z")
+(setq clog/time-format "%Y-%m-%dT%T%z")
    #+END_SRC
 
 ** Installation
