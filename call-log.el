@@ -73,7 +73,7 @@ If `clog/time-format is nil, return the default ISO 8601 format"
     (if time-str time-str (format-time-string "%Y-%m-%dT%T%z"))))
 
 ;;---------------------------------------------------------------------------
-;; Public use
+;; Emacs lisp use
 ;;---------------------------------------------------------------------------  
 ;;;###autoload
 (defun clog/msg(msg)
@@ -94,6 +94,23 @@ If `clog/time-format is nil, return the default ISO 8601 format"
   (clog/-write (format "%s %s"
 		      (clog/-color-text "clog/TODO:" 'font-lock-variable-name-face)
 		      (clog/-make-string msg))))
+
+;;---------------------------------------------------------------------------
+;; Interactive uses
+;;---------------------------------------------------------------------------  
+(defmacro clog/-make-stamper(name)
+  "Creates clog/the insert-stamped-x functions, internal use only."
+  `(progn
+     (defun ,(intern (concat "clog/insert-stamped-" name)) ()
+       ,(format "Inserts a call to clog/%s with stamped with your username and the time." name)
+       (interactive)
+       (insert ,(format "(clog/%s \"" name))
+       (save-excursion
+	 (insert (format " : %s @ %s\")" (getenv "USERNAME") (clog/time-string)))))))
+
+(clog/-make-stamper "msg")
+(clog/-make-stamper "bug")
+(clog/-make-stamper "todo")
 
 ;;---------------------------------------------------------------------------
 ;; Backtracing
@@ -165,8 +182,3 @@ called in the backtrace frame, FRAME."
 (provide 'call-log)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; call-log.el
-
-
-
-
-;; Say we need a reminder to come back and work on a certain function
