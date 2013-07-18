@@ -8,7 +8,7 @@
    #+END_SRC
 ** Example Usage
    You can put a reminder in a function like this:
-   #+BEGIN_SRC lisp
+   #+BEGIN_SRC cl
 (defun add-2 (x)
   "Returns X + 2."
   (clog/todo "Find where this goes wrong.")
