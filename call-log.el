@@ -6,9 +6,9 @@
 ;; Maintainer: Jordon Biondo <biondoj@mail.gvsu.edu>
 ;; Created: Fri Jul 12 12:57:34 2013 (-0400)
 ;; Version: .1
-;; Last-Updated: Mon Jul 15 11:35:53 2013 (-0400)
-;;           By: jorbi
-;;     Update #: 4
+;; Last-Updated: Thu Feb  6 12:39:38 2014 (-0500)
+;;           By: jordon.biondo
+;;     Update #: 6
 ;; URL: 
 ;; Doc URL: 
 ;; Keywords: 
@@ -76,25 +76,24 @@ If `clog/time-format is nil, return the default ISO 8601 format"
 ;; Emacs lisp use
 ;;---------------------------------------------------------------------------  
 ;;;###autoload
-(defun clog/msg(msg)
+(defun clog/msg(msg &rest args)
   "Writes MSG with call information to the `clog/-output-buffer'."
   (clog/-write (format "%s %s"
 		      (clog/-color-text "clog/MSG:" 'font-lock-constant-face)
-		      (clog/-make-string msg))))
+		      (clog/-make-string (apply 'format (cons msg args))))))
 ;;;###autoload
-(defun clog/bug(msg)
+(defun clog/bug(msg &rest args)
   "Writes MSG denated as a bug with call information to the `clog/-output-buffer'."
   (setq msg (propertize msg 'face 'font-lock-warning-face))
   (clog/-write (format "%s %s"
 		      (clog/-color-text "clog/BUG:" 'font-lock-warning-face)
-		      (clog/-make-string msg))))
+		      (clog/-make-string (apply 'format (cons msg args))))))
 ;;;###autoload
-(defun clog/todo(msg)
+(defun clog/todo(msg &rest args)
   "Writes MSG denated as a todo with call information to the `clog/-output-buffer'."
   (clog/-write (format "%s %s"
 		      (clog/-color-text "clog/TODO:" 'font-lock-variable-name-face)
-		      (clog/-make-string msg))))
-
+		      (clog/-make-string (apply 'format (cons msg args))))))
 ;;---------------------------------------------------------------------------
 ;; Interactive uses
 ;;---------------------------------------------------------------------------  
@@ -106,7 +105,7 @@ If `clog/time-format is nil, return the default ISO 8601 format"
        (interactive)
        (insert ,(format "(clog/%s \"" name))
        (save-excursion
-	 (insert (format " : %s @ %s\")" (getenv "USERNAME") (clog/time-string)))))))
+	 (insert (format " : %s @ %s\")" (or (getenv "USERNAME") (getenv "USER")) (clog/-time-string)))))))
 
 (clog/-make-stamper "msg")
 (clog/-make-stamper "bug")
