@@ -173,7 +173,8 @@ called in the backtrace frame, FRAME."
   "Writes the string MSG to the end of the `clog/-output-buffer'."
   (with-current-buffer (clog/-get-output-buffer)
     (goto-char (point-max))
-    (insert (format "\n%s\n" msg))))
+    (let ((inhibit-read-only t))
+      (insert (format "\n%s\n" msg)))))
 
 ;;---------------------------------------------------------------------------
 ;; Provide it
