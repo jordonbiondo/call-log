@@ -127,8 +127,8 @@ If `clog/time-format is nil, return the default ISO 8601 format"
 (defun clog/-frame-is-direct-call-p(frame)
   "Returns true is a backtrace frame is top level function call."
   (if (> (length frame) 1)
-      (and (equal (first frame) t)
-           (fboundp (second frame)))))
+      (and (equal (car frame) t)
+           (fboundp (cadr frame)))))
 
 (defun clog/-find-func-definition(frame)
   "Returns the name of the file containing the definition of the function that is being
@@ -141,7 +141,7 @@ called in the backtrace frame, FRAME."
 (defun clog/-get-frame-func(frame)
   "Returns the symbol name of the function being called in FRAME"
   (if (> (length frame) 1)
-      (second frame)
+      (cadr frame)
     nil))
 
 (defun clog/-frame-func-name(val)
